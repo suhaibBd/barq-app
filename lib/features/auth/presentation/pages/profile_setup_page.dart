@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../core/utils/validators.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../shared/widgets/custom_button.dart';
 import '../../../../shared/widgets/custom_text_field.dart';
 import '../bloc/auth_bloc.dart';
@@ -21,13 +22,11 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
 
   @override
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _emailController.dispose();
     super.dispose();
   }
 
@@ -48,6 +47,12 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
       },
       builder: (context, state) {
         return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_rounded),
+              onPressed: () => context.pop(),
+            ),
+          ),
           body: SafeArea(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
@@ -56,90 +61,59 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 20),
+                    Container(
+                      width: 72,
+                      height: 72,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.person_rounded,
+                        size: 36,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
                     Text(
-                      'أكمل ملفك الشخصي',
+                      S.of(context).registerAsPassenger,
                       style: AppTextStyles.headingMedium,
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 8),
                     Text(
-                      'أخبرنا عنك لنُحسّن تجربتك',
+                      S.of(context).enterNameToStart,
                       style: AppTextStyles.bodyMedium.copyWith(
                         color: AppColors.textSecondary,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 40),
-                    // Avatar placeholder
-                    Center(
-                      child: Stack(
-                        children: [
-                          CircleAvatar(
-                            radius: 50,
-                            backgroundColor: AppColors.primaryLight.withValues(alpha: 0.2),
-                            child: const Icon(
-                              Icons.person_rounded,
-                              size: 50,
-                              color: AppColors.primary,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            child: Container(
-                              padding: const EdgeInsets.all(6),
-                              decoration: const BoxDecoration(
-                                color: AppColors.accent,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.camera_alt_rounded,
-                                size: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 40),
                     CustomTextField(
                       controller: _firstNameController,
-                      label: 'الاسم الأول',
-                      hint: 'أحمد',
+                      label: S.of(context).firstName,
+                      hint: S.of(context).firstNameHint,
                       validator: (v) =>
-                          Validators.required(v, 'الاسم الأول'),
+                          Validators.required(v, S.of(context).firstName),
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
                       controller: _lastNameController,
-                      label: 'اسم العائلة',
-                      hint: 'محمد',
+                      label: S.of(context).lastName,
+                      hint: S.of(context).lastNameHint,
                       validator: (v) =>
-                          Validators.required(v, 'اسم العائلة'),
-                    ),
-                    const SizedBox(height: 20),
-                    CustomTextField(
-                      controller: _emailController,
-                      label: 'البريد الإلكتروني (اختياري)',
-                      hint: 'example@email.com',
-                      keyboardType: TextInputType.emailAddress,
-                      validator: Validators.email,
-                      textAlign: TextAlign.left,
+                          Validators.required(v, S.of(context).lastName),
                     ),
                     const SizedBox(height: 40),
                     CustomButton(
-                      text: 'متابعة',
+                      text: S.of(context).createAccount,
                       isLoading: state is AuthLoading,
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(UpdateProfileEvent(
                                 firstName: _firstNameController.text.trim(),
                                 lastName: _lastNameController.text.trim(),
-                                email: _emailController.text.trim().isEmpty
-                                    ? null
-                                    : _emailController.text.trim(),
                               ));
                         }
                       },

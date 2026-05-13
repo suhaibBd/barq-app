@@ -17,3 +17,5 @@ class SwitchRoleEvent extends HomeEvent {
 }
 
 class RefreshHomeEvent extends HomeEvent {}
+
+class ToggleOnlineEvent extends HomeEvent {}

@@ -19,13 +19,13 @@ class AuthRepositoryImpl implements AuthRepository {
   });
 
   @override
-  Future<Either<Failure, String>> sendOtp(String phone) async {
+  Future<Either<Failure, ({String verificationId, String? devCode})>> sendOtp(String phone) async {
     if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure());
     }
     try {
-      final verificationId = await remoteDataSource.sendOtp(phone);
-      return Right(verificationId);
+      final result = await remoteDataSource.sendOtp(phone);
+      return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     }
@@ -78,6 +78,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, User>> refreshProfile() async {
+    if (!await networkInfo.isConnected) {
+      return const Left(NetworkFailure());
+    }
+    try {
+      final user = await remoteDataSource.getCurrentUser();
+      await localDataSource.saveUser(user);
+      return Right(user);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> logout() async {
     try {
       if (await networkInfo.isConnected) {
@@ -91,20 +105,70 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<Either<Failure, User>> verifyFirebaseToken(
+      String firebaseIdToken) async {
+    if (!await networkInfo.isConnected) {
+      return const Left(NetworkFailure());
+    }
+    try {
+      final response =
+          await remoteDataSource.verifyFirebaseToken(firebaseIdToken);
+      await localDataSource.saveTokens(
+        accessToken: response.accessToken,
+        refreshToken: response.refreshToken,
+      );
+      await localDataSource.saveUser(response.user);
+      return Right(response.user);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
+  }
+
+  @override
+  Future<void> registerFcmToken(String fcmToken) async {
+    if (await networkInfo.isConnected) {
+      await remoteDataSource.registerFcmToken(fcmToken);
+    }
+  }
+
+  @override
   Future<Either<Failure, User>> updateProfile({
     required String firstName,
     required String lastName,
     String? email,
+    RegistrationRole role = RegistrationRole.restaurant,
+    String? nationalIdPath,
+    String? driverLicensePath,
+    String? carImagePath,
+    String? carNumber,
   }) async {
     if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure());
     }
     try {
-      final user = await remoteDataSource.updateProfile({
+      final data = <String, dynamic>{
         'first_name': firstName,
         'last_name': lastName,
+        'role': role == RegistrationRole.driver ? 'driver' : 'passenger',
         if (email != null) 'email': email,
-      });
+        if (carNumber != null) 'car_number': carNumber,
+      };
+      var user = await remoteDataSource.updateProfile(data);
+
+      if (role == RegistrationRole.driver &&
+          nationalIdPath != null &&
+          driverLicensePath != null &&
+          carImagePath != null &&
+          carNumber != null) {
+        await remoteDataSource.submitDriverDocuments(
+          nationalIdPath: nationalIdPath,
+          driverLicensePath: driverLicensePath,
+          carImagePath: carImagePath,
+          carNumber: carNumber,
+        );
+        user = await remoteDataSource.getCurrentUser();
+      }
+
       await localDataSource.saveUser(user);
       return Right(user);
     } on ServerException catch (e) {

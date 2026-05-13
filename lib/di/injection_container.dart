@@ -2,8 +2,12 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../core/locale/locale_notifier.dart';
 import '../core/network/dio_client.dart';
 import '../core/network/network_info.dart';
+import '../core/services/firebase_auth_service.dart';
+import '../core/services/location_tracking_service.dart';
+import '../core/services/notification_service.dart';
 import '../features/auth/data/datasources/auth_local_datasource.dart';
 import '../features/auth/data/datasources/auth_remote_datasource.dart';
 import '../features/auth/data/repositories/auth_repository_impl.dart';
@@ -25,46 +29,47 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton(() => const FlutterSecureStorage());
   sl.registerLazySingleton(() => Connectivity());
 
+  // ── Locale ──
+  sl.registerLazySingleton(() => LocaleNotifier(sl<SharedPreferences>()));
+
   // ── Core ──
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(sl<Connectivity>()));
   sl.registerLazySingleton(
       () => DioClient(secureStorage: sl<FlutterSecureStorage>()));
 
+  // ── Firebase Services ──
+  sl.registerLazySingleton(() => FirebaseAuthService());
+  sl.registerLazySingleton(() => NotificationService());
+  sl.registerLazySingleton(() => LocationTrackingService(sl<DioClient>()));
+
   // ── Auth ──
-  // Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(sl<DioClient>()));
   sl.registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(sl<FlutterSecureStorage>(), sl<SharedPreferences>()));
 
-  // Repository
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(
         remoteDataSource: sl<AuthRemoteDataSource>(),
         localDataSource: sl<AuthLocalDataSource>(),
         networkInfo: sl<NetworkInfo>(),
       ));
 
-  // Use cases
   sl.registerLazySingleton(() => SendOtpUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => VerifyOtpUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => GetCurrentUserUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => UpdateProfileUseCase(sl<AuthRepository>()));
   sl.registerLazySingleton(() => LogoutUseCase(sl<AuthRepository>()));
 
-  // BLoCs
-  sl.registerFactory(() => AuthBloc(
+  sl.registerLazySingleton(() => AuthBloc(
         sendOtpUseCase: sl<SendOtpUseCase>(),
         verifyOtpUseCase: sl<VerifyOtpUseCase>(),
         getCurrentUserUseCase: sl<GetCurrentUserUseCase>(),
         updateProfileUseCase: sl<UpdateProfileUseCase>(),
         logoutUseCase: sl<LogoutUseCase>(),
+        firebaseAuthService: sl<FirebaseAuthService>(),
+        authRepository: sl<AuthRepository>(),
       ));
 
-  sl.registerFactory(() => HomeBloc());
-
-  // ── Trips ──
-  // Note: TripRepository impl and data sources will be added later
-  // For now, TripSearchBloc is registered but requires TripRepository
-  // sl.registerFactory(() => TripSearchBloc(searchTripsUseCase: sl()));
+  sl.registerFactory(() => HomeBloc(authBloc: sl<AuthBloc>()));
 }

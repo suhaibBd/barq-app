@@ -12,6 +12,13 @@ class UserModel extends User {
     required super.rating,
     required super.totalTrips,
     required super.createdAt,
+    super.role,
+    super.nationalIdUrl,
+    super.driverLicenseUrl,
+    super.carImageUrl,
+    super.carNumber,
+    super.documentStatus,
+    super.isOnline,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -26,6 +33,15 @@ class UserModel extends User {
       rating: (json['rating'] as num?)?.toDouble() ?? 5.0,
       totalTrips: json['total_trips'] as int? ?? 0,
       createdAt: DateTime.parse(json['created_at'] as String),
+      role: json['role'] == 'driver'
+          ? RegistrationRole.driver
+          : RegistrationRole.restaurant,
+      nationalIdUrl: json['national_id_url'] as String?,
+      driverLicenseUrl: json['driver_license_url'] as String?,
+      carImageUrl: json['car_image_url'] as String?,
+      carNumber: json['car_number'] as String?,
+      documentStatus: json['document_status'] as String?,
+      isOnline: json['is_online'] as bool? ?? false,
     );
   }
 
@@ -40,5 +56,11 @@ class UserModel extends User {
         'rating': rating,
         'total_trips': totalTrips,
         'created_at': createdAt.toIso8601String(),
+        'role': role == RegistrationRole.driver ? 'driver' : 'restaurant',
+        'national_id_url': nationalIdUrl,
+        'driver_license_url': driverLicenseUrl,
+        'car_image_url': carImageUrl,
+        'car_number': carNumber,
+        'is_online': isOnline,
       };
 }

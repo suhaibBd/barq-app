@@ -6,6 +6,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../../../shared/widgets/custom_button.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
@@ -14,11 +15,13 @@ import '../bloc/auth_state.dart';
 class OtpPage extends StatefulWidget {
   final String verificationId;
   final String phone;
+  final String? devCode;
 
   const OtpPage({
     super.key,
     required this.verificationId,
     required this.phone,
+    this.devCode,
   });
 
   @override
@@ -27,9 +30,7 @@ class OtpPage extends StatefulWidget {
 
 class _OtpPageState extends State<OtpPage> {
   final _otpController = TextEditingController();
-  Timer? _timer;
-  int _countdown = AppConstants.otpResendSeconds;
-  bool _canResend = false;
+  StreamController<int>? _countdownController;
 
   @override
   void initState() {
@@ -38,32 +39,45 @@ class _OtpPageState extends State<OtpPage> {
   }
 
   void _startCountdown() {
-    _countdown = AppConstants.otpResendSeconds;
-    _canResend = false;
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_countdown > 0) {
-          _countdown--;
-        } else {
-          _canResend = true;
-          timer.cancel();
+    _countdownController?.close();
+    _countdownController = StreamController<int>();
+    final total = AppConstants.otpResendSeconds;
+    late StreamSubscription<int> sub;
+    sub = Stream.periodic(const Duration(seconds: 1), (i) => total - 1 - i)
+        .take(total)
+        .listen(
+      (remaining) {
+        if (!_countdownController!.isClosed) {
+          _countdownController!.add(remaining);
         }
-      });
-    });
+      },
+      onDone: () {
+        if (!_countdownController!.isClosed) {
+          // Signal completion with -1
+          _countdownController!.add(-1);
+        }
+      },
+    );
+    // Store the subscription reference so we can cancel on dispose
+    _countdownSubscription?.cancel();
+    _countdownSubscription = sub;
   }
+
+  StreamSubscription<int>? _countdownSubscription;
 
   @override
   void dispose() {
     _otpController.dispose();
-    _timer?.cancel();
+    _countdownSubscription?.cancel();
+    _countdownController?.close();
     super.dispose();
   }
 
   void _submitOtp(String code) {
     if (code.length == AppConstants.otpLength) {
-      context.read<AuthBloc>().add(VerifyOtpEvent(
+      context.read<AuthBloc>().add(FirebaseOtpVerifyEvent(
             verificationId: widget.verificationId,
-            code: code,
+            smsCode: code,
           ));
     }
   }
@@ -74,7 +88,7 @@ class _OtpPageState extends State<OtpPage> {
       listener: (context, state) {
         if (state is AuthAuthenticated) {
           if (state.isNewUser) {
-            context.go('/auth/profile-setup');
+            context.go('/auth/role-selection');
           } else {
             context.go('/home');
           }
@@ -102,20 +116,88 @@ class _OtpPageState extends State<OtpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 12),
+                  Center(
+                    child: Container(
+                      width: double.infinity,
+                      height: 160,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [
+                            AppColors.primaryDark,
+                            AppColors.primary,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned(
+                            right: 20,
+                            bottom: 10,
+                            child: Icon(
+                              Icons.phone_android_rounded,
+                              size: 80,
+                              color: Colors.white.withValues(alpha: 0.1),
+                            ),
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.15),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.sms_rounded,
+                                  size: 32,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
                   Text(
-                    'أدخل رمز التحقق',
+                    S.of(context).enterOtp,
                     style: AppTextStyles.headingMedium,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'تم إرسال رمز التحقق إلى\n${widget.phone}',
+                    S.of(context).otpSentTo(widget.phone),
                     style: AppTextStyles.bodyMedium.copyWith(
                       color: AppColors.textSecondary,
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  if (widget.devCode != null) ...[
+                    const SizedBox(height: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      decoration: BoxDecoration(
+                        color: AppColors.warning.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColors.warning.withValues(alpha: 0.3)),
+                      ),
+                      child: Text(
+                        'Dev Code: ${widget.devCode}',
+                        style: AppTextStyles.bodyMedium.copyWith(
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 4,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 40),
                   Directionality(
                     textDirection: TextDirection.ltr,
@@ -144,31 +226,48 @@ class _OtpPageState extends State<OtpPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  if (!_canResend)
-                    Text(
-                      'إعادة الإرسال بعد $_countdown ثانية',
-                      style: AppTextStyles.bodySmall,
-                      textAlign: TextAlign.center,
-                    )
-                  else
-                    TextButton(
-                      onPressed: () {
-                        context
-                            .read<AuthBloc>()
-                            .add(SendOtpEvent(widget.phone));
-                        _startCountdown();
-                      },
-                      child: Text(
-                        'إعادة إرسال الرمز',
-                        style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
+                  StreamBuilder<int>(
+                    stream: _countdownController?.stream,
+                    initialData: AppConstants.otpResendSeconds,
+                    builder: (context, snapshot) {
+                      final remaining = snapshot.data ?? 0;
+                      final canResend = remaining < 0;
+                      if (!canResend) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.timer_outlined,
+                                size: 16, color: AppColors.textSecondary),
+                            const SizedBox(width: 6),
+                            Text(
+                              S.of(context).resendIn(
+                                  remaining < 0 ? 0 : remaining),
+                              style: AppTextStyles.bodySmall,
+                            ),
+                          ],
+                        );
+                      } else {
+                        return TextButton(
+                          onPressed: () {
+                            context
+                                .read<AuthBloc>()
+                                .add(FirebasePhoneVerifyEvent(widget.phone));
+                            _startCountdown();
+                          },
+                          child: Text(
+                            S.of(context).resendCode,
+                            style: AppTextStyles.bodyMedium.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                   const Spacer(),
                   CustomButton(
-                    text: 'تحقق',
+                    text: S.of(context).verify,
                     isLoading: state is AuthLoading,
                     onPressed: () => _submitOtp(_otpController.text),
                   ),

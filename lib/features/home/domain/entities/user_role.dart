@@ -1,7 +1,6 @@
 enum UserRole {
-  passenger,
+  restaurant,
   driver;
 
-  String get arabicName => this == UserRole.passenger ? 'راكب' : 'سائق';
-  String get icon => this == UserRole.passenger ? '🧑' : '🚗';
+  String get arabicName => this == UserRole.restaurant ? 'مطعم' : 'سائق';
 }

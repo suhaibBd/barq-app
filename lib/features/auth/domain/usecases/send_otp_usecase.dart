@@ -4,13 +4,15 @@ import '../../../../core/errors/failures.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../repositories/auth_repository.dart';
 
-class SendOtpUseCase implements UseCase<String, SendOtpParams> {
+typedef OtpSendResult = ({String verificationId, String? devCode});
+
+class SendOtpUseCase implements UseCase<OtpSendResult, SendOtpParams> {
   final AuthRepository repository;
 
   SendOtpUseCase(this.repository);
 
   @override
-  Future<Either<Failure, String>> call(SendOtpParams params) async {
+  Future<Either<Failure, OtpSendResult>> call(SendOtpParams params) async {
     return await repository.sendOtp(params.phone);
   }
 }

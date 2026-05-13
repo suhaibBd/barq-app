@@ -29,22 +29,56 @@ class CustomButton extends StatelessWidget {
       );
     }
 
-    return ElevatedButton(
-      onPressed: isLoading ? null : onPressed,
-      style: backgroundColor != null
-          ? ElevatedButton.styleFrom(backgroundColor: backgroundColor)
-          : null,
-      child: _buildChild(),
+    final gradient = LinearGradient(
+      colors: [
+        backgroundColor ?? AppColors.gradientStart,
+        backgroundColor?.withAlpha(200) ?? AppColors.gradientEnd,
+      ],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
+    );
+
+    final bool enabled = !isLoading && onPressed != null;
+
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 150),
+      opacity: enabled ? 1.0 : 0.6,
+      child: Container(
+        height: 54,
+        decoration: BoxDecoration(
+          gradient: gradient,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: enabled
+              ? [
+                  BoxShadow(
+                    color: AppColors.shadowColor,
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
+                  ),
+                ]
+              : null,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: enabled ? onPressed : null,
+            borderRadius: BorderRadius.circular(12),
+            splashColor: Colors.white.withAlpha(30),
+            highlightColor: Colors.white.withAlpha(15),
+            child: Center(child: _buildChild()),
+          ),
+        ),
+      ),
     );
   }
 
   Widget _buildChild() {
     if (isLoading) {
       return const SizedBox(
-        height: 22,
-        width: 22,
+        height: 20,
+        width: 20,
         child: CircularProgressIndicator(
-          strokeWidth: 2.5,
+          strokeWidth: 2,
           color: Colors.white,
         ),
       );
@@ -54,17 +88,17 @@ class CustomButton extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 20),
+          Icon(icon, size: 20, color: Colors.white),
           const SizedBox(width: 8),
           Text(text, style: AppTextStyles.button.copyWith(
-            color: isOutlined ? AppColors.primary : Colors.white,
+            color: Colors.white,
           )),
         ],
       );
     }
 
     return Text(text, style: AppTextStyles.button.copyWith(
-      color: isOutlined ? AppColors.primary : Colors.white,
+      color: Colors.white,
     ));
   }
 }

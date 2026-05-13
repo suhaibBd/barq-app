@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../l10n/generated/app_localizations.dart';
 import '../../domain/entities/user_role.dart';
 
 class RoleToggleWidget extends StatelessWidget {
@@ -18,14 +19,15 @@ class RoleToggleWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border),
+        color: AppColors.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         children: [
-          _buildTab(UserRole.passenger, 'راكب', Icons.person_rounded),
-          _buildTab(UserRole.driver, 'سائق', Icons.directions_car_rounded),
+          _buildTab(UserRole.restaurant, S.of(context).restaurant,
+              Icons.restaurant_rounded),
+          _buildTab(UserRole.driver, S.of(context).driver,
+              Icons.directions_car_rounded),
         ],
       ),
     );
@@ -38,25 +40,36 @@ class RoleToggleWidget extends StatelessWidget {
         onTap: () => onRoleChanged(role),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color: isSelected ? AppColors.primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(12),
+            color: isSelected ? AppColors.surface : Colors.transparent,
+            borderRadius: BorderRadius.circular(26),
+            boxShadow: isSelected
+                ? [
+                    BoxShadow(
+                      color: AppColors.shadowColor.withValues(alpha: 0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : null,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 icon,
-                size: 20,
-                color: isSelected ? Colors.white : AppColors.textSecondary,
+                size: 18,
+                color: isSelected ? AppColors.primary : AppColors.textLight,
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               Text(
                 label,
                 style: AppTextStyles.bodyMedium.copyWith(
-                  color: isSelected ? Colors.white : AppColors.textSecondary,
-                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
+                  color:
+                      isSelected ? AppColors.primary : AppColors.textLight,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 ),
               ),
             ],

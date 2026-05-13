@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 
@@ -17,9 +18,12 @@ class LoadingIndicator extends StatelessWidget {
       child: SizedBox(
         height: size,
         width: size,
-        child: CircularProgressIndicator(
+        child: CircularProgressIndicator.adaptive(
           strokeWidth: 3,
-          color: color ?? AppColors.primary,
+          strokeCap: StrokeCap.round,
+          valueColor: AlwaysStoppedAnimation<Color>(
+            color ?? AppColors.primary,
+          ),
         ),
       ),
     );
@@ -42,9 +46,14 @@ class LoadingOverlay extends StatelessWidget {
       children: [
         child,
         if (isLoading)
-          Container(
-            color: Colors.black26,
-            child: const LoadingIndicator(),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+              child: Container(
+                color: Colors.black.withAlpha(30),
+                child: const LoadingIndicator(),
+              ),
+            ),
           ),
       ],
     );
