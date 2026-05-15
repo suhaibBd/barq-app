@@ -29,7 +29,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.autostrad.autostrad</string>
+				<string>com.barq.app</string>
 			</array>
 		</dict>
 	</array>

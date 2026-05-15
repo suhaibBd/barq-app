@@ -69,6 +69,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1078630148752',
     projectId: 'autostrade-app',
     storageBucket: 'autostrade-app.firebasestorage.app',
-    iosBundleId: 'com.autostrad.autostrad',
+    iosBundleId: 'com.barq.app',
   );
 }

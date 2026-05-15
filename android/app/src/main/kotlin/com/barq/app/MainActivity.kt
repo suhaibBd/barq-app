@@ -1,4 +1,4 @@
-package com.autostrad.autostrad
+package com.barq.app
 
 import io.flutter.embedding.android.FlutterActivity
 
