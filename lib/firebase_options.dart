@@ -56,19 +56,19 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDqtM8IjHY51ytZZkbOJ6v1ixhuhxtjc8s',
-    appId: '1:1078630148752:android:c7f49df7713441904f0615',
-    messagingSenderId: '1078630148752',
-    projectId: 'autostrade-app',
-    storageBucket: 'autostrade-app.firebasestorage.app',
+    apiKey: 'AIzaSyBlqADDVsOhOehR9xirFPqkI6BiA5ef3Iw',
+    appId: '1:525468818904:android:76e1d14e8a1ce44f4da6ad',
+    messagingSenderId: '525468818904',
+    projectId: 'barq-jo-app',
+    storageBucket: 'barq-jo-app.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDhROT2huikRgO31cdC6QZ7lKS0kgeQzrE',
-    appId: '1:1078630148752:ios:3da2d7134d0a45a44f0615',
-    messagingSenderId: '1078630148752',
-    projectId: 'autostrade-app',
-    storageBucket: 'autostrade-app.firebasestorage.app',
+    apiKey: 'AIzaSyB41QNX6eVh5xTedXau-0HelcO1k1AGvd8',
+    appId: '1:525468818904:ios:34f9c53543ac8ca54da6ad',
+    messagingSenderId: '525468818904',
+    projectId: 'barq-jo-app',
+    storageBucket: 'barq-jo-app.firebasestorage.app',
     iosBundleId: 'com.barq.app',
   );
 
