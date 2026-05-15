@@ -2,15 +2,15 @@ import 'dart:io' show Platform;
 
 class ApiConstants {
   // For production builds, pass the URL at build time:
-  //   flutter build apk --dart-define=API_BASE_URL=https://api.sahm-app.com/api/v1
-  //   flutter build ios --dart-define=API_BASE_URL=https://api.sahm-app.com/api/v1
+  //   flutter build apk --dart-define=API_BASE_URL=https://api.barq-app.com/api/v1
+  //   flutter build ios --dart-define=API_BASE_URL=https://api.barq-app.com/api/v1
   static const bool _isProduction = bool.fromEnvironment('dart.vm.product');
   static const String _customUrl = String.fromEnvironment('API_BASE_URL');
 
   static final String baseUrl = _customUrl.isNotEmpty
       ? _customUrl
       : _isProduction
-          ? 'https://api.sahm-app.com/api/v1'
+          ? 'https://api.barq-app.com/api/v1'
           : Platform.isAndroid
               ? 'http://10.0.2.2:8000/api/v1'
               : 'http://localhost:8000/api/v1';

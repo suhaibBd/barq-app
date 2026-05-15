@@ -100,7 +100,7 @@ abstract class S {
   /// No description provided for @appName.
   ///
   /// In ar, this message translates to:
-  /// **'سهم'**
+  /// **'برق'**
   String get appName;
 
   /// No description provided for @navHome.
@@ -136,7 +136,7 @@ abstract class S {
   /// No description provided for @welcomeTitle.
   ///
   /// In ar, this message translates to:
-  /// **'مرحباً بك في سهم'**
+  /// **'مرحباً بك في برق'**
   String get welcomeTitle;
 
   /// No description provided for @enterPhoneSubtitle.
@@ -191,7 +191,7 @@ abstract class S {
   ///
   /// In ar, this message translates to:
   /// **'دخول كمطعم'**
-  String get devLoginRestaurant;
+  String get devLoginStore;
 
   /// No description provided for @enterOtp.
   ///
@@ -223,11 +223,11 @@ abstract class S {
   /// **'تحقق'**
   String get verify;
 
-  /// No description provided for @howToUseAutostrad.
+  /// No description provided for @howToUseApp.
   ///
   /// In ar, this message translates to:
-  /// **'كيف تريد استخدام سهم؟'**
-  String get howToUseAutostrad;
+  /// **'كيف تريد استخدام برق؟'**
+  String get howToUseApp;
 
   /// No description provided for @chooseRegistration.
   ///
@@ -241,11 +241,11 @@ abstract class S {
   /// **'راكب'**
   String get passenger;
 
-  /// No description provided for @restaurant.
+  /// No description provided for @store.
   ///
   /// In ar, this message translates to:
   /// **'مطعم'**
-  String get restaurant;
+  String get store;
 
   /// No description provided for @driver.
   ///
@@ -259,11 +259,11 @@ abstract class S {
   /// **'ابحث عن رحلات واحجز مقعدك'**
   String get passengerSubtitle;
 
-  /// No description provided for @restaurantSubtitle.
+  /// No description provided for @storeSubtitle.
   ///
   /// In ar, this message translates to:
   /// **'أنشئ طلبات توصيل لمطعمك'**
-  String get restaurantSubtitle;
+  String get storeSubtitle;
 
   /// No description provided for @driverSubtitle.
   ///
@@ -283,11 +283,11 @@ abstract class S {
   /// **'تسجيل كراكب'**
   String get registerAsPassenger;
 
-  /// No description provided for @registerAsRestaurant.
+  /// No description provided for @registerAsStore.
   ///
   /// In ar, this message translates to:
   /// **'تسجيل كمطعم'**
-  String get registerAsRestaurant;
+  String get registerAsStore;
 
   /// No description provided for @enterNameToStart.
   ///
@@ -1210,7 +1210,7 @@ abstract class S {
   /// No description provided for @appVersion.
   ///
   /// In ar, this message translates to:
-  /// **'سهم v{version}'**
+  /// **'برق v{version}'**
   String appVersion(String version);
 
   /// No description provided for @lowBalanceWarning.
@@ -1252,7 +1252,7 @@ abstract class S {
   /// No description provided for @paymentStep1.
   ///
   /// In ar, this message translates to:
-  /// **'حوّل المبلغ عبر CliQ إلى: sahm@cliq'**
+  /// **'حوّل المبلغ عبر CliQ إلى: barq@cliq'**
   String get paymentStep1;
 
   /// No description provided for @paymentStep2.

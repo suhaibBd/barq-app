@@ -38,7 +38,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   UserRole _roleFromUser(User user) {
     return user.role == RegistrationRole.driver
         ? UserRole.driver
-        : UserRole.restaurant;
+        : UserRole.store;
   }
 
   Future<void> _onLoadHome(
@@ -60,7 +60,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ));
     } else {
       emit(const HomeLoaded(
-        currentRole: UserRole.restaurant,
+        currentRole: UserRole.store,
         isDriverVerified: false,
       ));
     }

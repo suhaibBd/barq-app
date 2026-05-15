@@ -18,7 +18,7 @@ class RoleSelectionPage extends StatelessWidget {
             children: [
               const SizedBox(height: 40),
               Text(
-                S.of(context).howToUseAutostrad,
+                S.of(context).howToUseApp,
                 style: AppTextStyles.headingMedium,
                 textAlign: TextAlign.center,
               ),
@@ -32,9 +32,9 @@ class RoleSelectionPage extends StatelessWidget {
               ),
               const SizedBox(height: 48),
               _RoleCard(
-                icon: Icons.restaurant_rounded,
-                title: S.of(context).restaurant,
-                subtitle: S.of(context).restaurantSubtitle,
+                icon: Icons.storefront_rounded,
+                title: S.of(context).store,
+                subtitle: S.of(context).storeSubtitle,
                 color: AppColors.primary,
                 onTap: () => context.go('/auth/passenger-setup'),
               ),

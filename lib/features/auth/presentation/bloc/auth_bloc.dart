@@ -247,7 +247,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ? User(
             id: 'dev-driver-001',
             phone: '+962790000000',
-            email: 'driver@sahm.test',
+            email: 'driver@barq.test',
             firstName: 'سائق',
             lastName: 'تجريبي',
             isDriverVerified: true,
@@ -256,10 +256,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             createdAt: DateTime(2025, 1, 1),
           )
         : User(
-            id: 'dev-restaurant-001',
+            id: 'dev-store-001',
             phone: '+962780000000',
-            email: 'restaurant@sahm.test',
-            firstName: 'مطعم',
+            email: 'store@barq.test',
+            firstName: 'متجر',
             lastName: 'تجريبي',
             isDriverVerified: false,
             rating: 5.0,

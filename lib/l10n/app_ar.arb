@@ -1,7 +1,7 @@
 {
   "@@locale": "ar",
 
-  "appName": "سهم",
+  "appName": "برق",
 
   "navHome": "الرئيسية",
   "navSearch": "البحث",
@@ -9,7 +9,7 @@
   "navProfile": "حسابي",
   "orders": "الطلبات",
 
-  "welcomeTitle": "مرحباً بك في سهم",
+  "welcomeTitle": "مرحباً بك في برق",
   "enterPhoneSubtitle": "أدخل رقم موبايلك للبدء",
   "phoneHint": "7X XXXX XXX",
   "phoneLabel": "رقم الهاتف",
@@ -18,7 +18,7 @@
   "termsAgreement": "بالمتابعة، أنت توافق على شروط الاستخدام وسياسة الخصوصية",
   "devLogin": "دخول تجريبي (Dev)",
   "devLoginDriver": "دخول كسائق",
-  "devLoginRestaurant": "دخول كمطعم",
+  "devLoginStore": "دخول كمتجر",
 
   "enterOtp": "أدخل رمز التحقق",
   "otpSentTo": "تم إرسال رمز التحقق إلى\n{phone}",
@@ -28,18 +28,18 @@
   "resendCode": "إعادة إرسال الرمز",
   "verify": "تحقق",
 
-  "howToUseAutostrad": "كيف تريد استخدام سهم؟",
+  "howToUseApp": "كيف تريد استخدام برق؟",
   "chooseRegistration": "اختر طريقة التسجيل المناسبة لك",
   "passenger": "راكب",
-  "restaurant": "مطعم",
+  "store": "متجر",
   "driver": "سائق",
   "passengerSubtitle": "ابحث عن رحلات واحجز مقعدك",
-  "restaurantSubtitle": "أنشئ طلبات توصيل لمطعمك",
+  "storeSubtitle": "أنشئ طلبات توصيل لنشاطك التجاري",
   "driverSubtitle": "وصّل الطلبات واكسب دخلاً إضافياً",
   "switchRoleLater": "يمكنك التبديل بين الوضعين لاحقاً من الإعدادات",
 
   "registerAsPassenger": "تسجيل كراكب",
-  "registerAsRestaurant": "تسجيل كمطعم",
+  "registerAsStore": "تسجيل كمتجر",
   "enterNameToStart": "أدخل اسمك للبدء",
   "firstName": "الاسم الأول",
   "firstNameHint": "أحمد",
@@ -211,7 +211,7 @@
   "user": "مستخدم",
   "tripsCount": "{count} رحلة",
   "@tripsCount": { "placeholders": { "count": { "type": "int" } } },
-  "appVersion": "سهم v{version}",
+  "appVersion": "برق v{version}",
   "@appVersion": { "placeholders": { "version": { "type": "String" } } },
 
   "lowBalanceWarning": "رصيدك منخفض. اشحن رصيدك لتتمكن من قبول الحجوزات.",
@@ -220,7 +220,7 @@
   "topUpBalance": "شحن الرصيد",
   "chooseTopUpAmount": "اختر المبلغ الذي تريد شحنه",
   "paymentMethod": "طريقة الدفع",
-  "paymentStep1": "حوّل المبلغ عبر CliQ إلى: sahm@cliq",
+  "paymentStep1": "حوّل المبلغ عبر CliQ إلى: barq@cliq",
   "paymentStep2": "أرسل لنا صورة الإيصال",
   "paymentStep3": "سيتم إضافة الرصيد خلال دقائق",
   "contactViaWhatsapp": "تواصل معنا عبر واتساب",
@@ -410,7 +410,7 @@
   "goOffline": "أوقف استقبال الطلبات",
 
   "createNewOrder": "إنشاء طلب جديد",
-  "createOrderDesc": "أنشئ طلب توصيل لمطعمك",
+  "createOrderDesc": "أنشئ طلب توصيل جديد",
   "myRecentOrders": "طلباتي الأخيرة",
   "noOrdersYet": "لا توجد طلبات بعد",
   "availableOrdersTitle": "طلبات متاحة للتوصيل",

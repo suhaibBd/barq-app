@@ -22,7 +22,7 @@ abstract class AuthRepository {
     required String firstName,
     required String lastName,
     String? email,
-    RegistrationRole role = RegistrationRole.restaurant,
+    RegistrationRole role = RegistrationRole.store,
     String? nationalIdPath,
     String? driverLicensePath,
     String? carImagePath,

@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
 
-  "appName": "Sahm",
+  "appName": "Barq",
 
   "navHome": "Home",
   "navSearch": "Search",
@@ -9,7 +9,7 @@
   "navProfile": "Profile",
   "orders": "Orders",
 
-  "welcomeTitle": "Welcome to Sahm",
+  "welcomeTitle": "Welcome to Barq",
   "enterPhoneSubtitle": "Enter your phone number to get started",
   "phoneHint": "7X XXXX XXX",
   "phoneLabel": "Phone Number",
@@ -18,7 +18,7 @@
   "termsAgreement": "By continuing, you agree to the Terms of Service and Privacy Policy",
   "devLogin": "Dev Login (Dev)",
   "devLoginDriver": "Login as Driver",
-  "devLoginRestaurant": "Login as Restaurant",
+  "devLoginStore": "Login as Store",
 
   "enterOtp": "Enter Verification Code",
   "otpSentTo": "Verification code sent to\n{phone}",
@@ -26,18 +26,18 @@
   "resendCode": "Resend Code",
   "verify": "Verify",
 
-  "howToUseAutostrad": "How would you like to use Sahm?",
+  "howToUseApp": "How would you like to use Barq?",
   "chooseRegistration": "Choose the registration type that suits you",
   "passenger": "Passenger",
-  "restaurant": "Restaurant",
+  "store": "Store",
   "driver": "Driver",
   "passengerSubtitle": "Search for trips and book your seat",
-  "restaurantSubtitle": "Create delivery orders for your restaurant",
+  "storeSubtitle": "Create delivery orders for your business",
   "driverSubtitle": "Deliver orders and earn extra income",
   "switchRoleLater": "You can switch between modes later from Settings",
 
   "registerAsPassenger": "Register as Passenger",
-  "registerAsRestaurant": "Register as Restaurant",
+  "registerAsStore": "Register as Store",
   "enterNameToStart": "Enter your name to get started",
   "firstName": "First Name",
   "firstNameHint": "John",
@@ -200,7 +200,7 @@
   "cancel": "Cancel",
   "user": "User",
   "tripsCount": "{count} trips",
-  "appVersion": "Sahm v{version}",
+  "appVersion": "Barq v{version}",
 
   "lowBalanceWarning": "Your balance is low. Top up to be able to accept bookings.",
   "recentTransactions": "Recent Transactions",
@@ -208,7 +208,7 @@
   "topUpBalance": "Top Up Balance",
   "chooseTopUpAmount": "Choose the amount to top up",
   "paymentMethod": "Payment Method",
-  "paymentStep1": "Transfer via CliQ to: sahm@cliq",
+  "paymentStep1": "Transfer via CliQ to: barq@cliq",
   "paymentStep2": "Send us the receipt photo",
   "paymentStep3": "Balance will be added within minutes",
   "contactViaWhatsapp": "Contact us via WhatsApp",
@@ -389,7 +389,7 @@
   "goOffline": "Go Offline",
 
   "createNewOrder": "Create New Order",
-  "createOrderDesc": "Create a delivery order for your restaurant",
+  "createOrderDesc": "Create a new delivery order",
   "myRecentOrders": "My Recent Orders",
   "noOrdersYet": "No orders yet",
   "availableOrdersTitle": "Available Orders",

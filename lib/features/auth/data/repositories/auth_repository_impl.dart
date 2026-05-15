@@ -136,7 +136,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String firstName,
     required String lastName,
     String? email,
-    RegistrationRole role = RegistrationRole.restaurant,
+    RegistrationRole role = RegistrationRole.store,
     String? nationalIdPath,
     String? driverLicensePath,
     String? carImagePath,
@@ -149,7 +149,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final data = <String, dynamic>{
         'first_name': firstName,
         'last_name': lastName,
-        'role': role == RegistrationRole.driver ? 'driver' : 'passenger',
+        'role': role == RegistrationRole.driver ? 'driver' : 'store',
         if (email != null) 'email': email,
         if (carNumber != null) 'car_number': carNumber,
       };

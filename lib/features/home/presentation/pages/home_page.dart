@@ -149,8 +149,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                         },
                       ),
                       const SizedBox(height: 24),
-                      if (state.currentRole == UserRole.restaurant)
-                        _buildRestaurantContent(context)
+                      if (state.currentRole == UserRole.store)
+                        _buildStoreContent(context)
                       else
                         _buildDriverContent(context, state),
                     ],
@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   //  RESTAURANT CONTENT
   // ═══════════════════════════════════════════════
 
-  Widget _buildRestaurantContent(BuildContext context) {
+  Widget _buildStoreContent(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

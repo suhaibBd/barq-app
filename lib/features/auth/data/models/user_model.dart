@@ -35,7 +35,7 @@ class UserModel extends User {
       createdAt: DateTime.parse(json['created_at'] as String),
       role: json['role'] == 'driver'
           ? RegistrationRole.driver
-          : RegistrationRole.restaurant,
+          : RegistrationRole.store,
       nationalIdUrl: json['national_id_url'] as String?,
       driverLicenseUrl: json['driver_license_url'] as String?,
       carImageUrl: json['car_image_url'] as String?,
@@ -56,7 +56,7 @@ class UserModel extends User {
         'rating': rating,
         'total_trips': totalTrips,
         'created_at': createdAt.toIso8601String(),
-        'role': role == RegistrationRole.driver ? 'driver' : 'restaurant',
+        'role': role == RegistrationRole.driver ? 'driver' : 'store',
         'national_id_url': nationalIdUrl,
         'driver_license_url': driverLicenseUrl,
         'car_image_url': carImageUrl,

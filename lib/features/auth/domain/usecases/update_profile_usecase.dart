@@ -39,7 +39,7 @@ class UpdateProfileParams extends Equatable {
     required this.firstName,
     required this.lastName,
     this.email,
-    this.role = RegistrationRole.restaurant,
+    this.role = RegistrationRole.store,
     this.nationalIdPath,
     this.driverLicensePath,
     this.carImagePath,

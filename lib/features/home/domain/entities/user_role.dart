@@ -1,6 +1,6 @@
 enum UserRole {
-  restaurant,
+  store,
   driver;
 
-  String get arabicName => this == UserRole.restaurant ? 'مطعم' : 'سائق';
+  String get arabicName => this == UserRole.store ? 'متجر' : 'سائق';
 }

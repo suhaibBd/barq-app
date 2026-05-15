@@ -165,9 +165,9 @@ class _PhoneEntryPageState extends State<PhoneEntryPage> {
                           onPressed: () {
                             context.read<AuthBloc>().add(const DevLoginEvent(asDriver: false));
                           },
-                          icon: const Icon(Icons.restaurant_rounded, size: 16),
+                          icon: const Icon(Icons.storefront_rounded, size: 16),
                           label: Text(
-                            S.of(context).devLoginRestaurant,
+                            S.of(context).devLoginStore,
                             style: AppTextStyles.bodySmall.copyWith(
                               color: AppColors.textLight,
                               decoration: TextDecoration.underline,

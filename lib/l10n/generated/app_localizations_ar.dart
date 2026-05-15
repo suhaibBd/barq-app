@@ -9,7 +9,7 @@ class SAr extends S {
   SAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appName => 'سهم';
+  String get appName => 'برق';
 
   @override
   String get navHome => 'الرئيسية';
@@ -27,7 +27,7 @@ class SAr extends S {
   String get orders => 'الطلبات';
 
   @override
-  String get welcomeTitle => 'مرحباً بك في سهم';
+  String get welcomeTitle => 'مرحباً بك في برق';
 
   @override
   String get enterPhoneSubtitle => 'أدخل رقم موبايلك للبدء';
@@ -55,7 +55,7 @@ class SAr extends S {
   String get devLoginDriver => 'دخول كسائق';
 
   @override
-  String get devLoginRestaurant => 'دخول كمطعم';
+  String get devLoginStore => 'دخول كمتجر';
 
   @override
   String get enterOtp => 'أدخل رمز التحقق';
@@ -77,7 +77,7 @@ class SAr extends S {
   String get verify => 'تحقق';
 
   @override
-  String get howToUseAutostrad => 'كيف تريد استخدام سهم؟';
+  String get howToUseApp => 'كيف تريد استخدام برق؟';
 
   @override
   String get chooseRegistration => 'اختر طريقة التسجيل المناسبة لك';
@@ -86,8 +86,7 @@ class SAr extends S {
   String get passenger => 'راكب';
 
   @override
-  @override
-  String get restaurant => 'مطعم';
+  String get store => 'متجر';
 
   @override
   String get driver => 'سائق';
@@ -96,7 +95,7 @@ class SAr extends S {
   String get passengerSubtitle => 'ابحث عن رحلات واحجز مقعدك';
 
   @override
-  String get restaurantSubtitle => 'أنشئ طلبات توصيل لمطعمك';
+  String get storeSubtitle => 'أنشئ طلبات توصيل لنشاطك التجاري';
 
   @override
   String get driverSubtitle => 'وصّل الطلبات واكسب دخلاً إضافياً';
@@ -108,7 +107,7 @@ class SAr extends S {
   String get registerAsPassenger => 'تسجيل كراكب';
 
   @override
-  String get registerAsRestaurant => 'تسجيل كمطعم';
+  String get registerAsStore => 'تسجيل كمتجر';
 
   @override
   String get enterNameToStart => 'أدخل اسمك للبدء';
@@ -594,7 +593,7 @@ class SAr extends S {
 
   @override
   String appVersion(String version) {
-    return 'سهم v$version';
+    return 'برق v$version';
   }
 
   @override
@@ -617,7 +616,7 @@ class SAr extends S {
   String get paymentMethod => 'طريقة الدفع';
 
   @override
-  String get paymentStep1 => 'حوّل المبلغ عبر CliQ إلى: sahm@cliq';
+  String get paymentStep1 => 'حوّل المبلغ عبر CliQ إلى: barq@cliq';
 
   @override
   String get paymentStep2 => 'أرسل لنا صورة الإيصال';

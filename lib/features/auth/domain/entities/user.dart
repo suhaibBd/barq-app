@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 enum RegistrationRole {
-  restaurant,
+  store,
   driver;
 
-  String get arabicName => this == RegistrationRole.restaurant ? 'مطعم' : 'سائق';
+  String get arabicName => this == RegistrationRole.store ? 'متجر' : 'سائق';
 }
 
 class User extends Equatable {
@@ -37,7 +37,7 @@ class User extends Equatable {
     required this.rating,
     required this.totalTrips,
     required this.createdAt,
-    this.role = RegistrationRole.restaurant,
+    this.role = RegistrationRole.store,
     this.nationalIdUrl,
     this.driverLicenseUrl,
     this.carImageUrl,

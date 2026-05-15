@@ -20,19 +20,19 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initDependencies();
   await sl<NotificationService>().init();
-  runApp(SahmApp(localeNotifier: sl<LocaleNotifier>()));
+  runApp(BarqApp(localeNotifier: sl<LocaleNotifier>()));
 }
 
-class SahmApp extends StatefulWidget {
+class BarqApp extends StatefulWidget {
   final LocaleNotifier localeNotifier;
 
-  const SahmApp({super.key, required this.localeNotifier});
+  const BarqApp({super.key, required this.localeNotifier});
 
   @override
-  State<SahmApp> createState() => _SahmAppState();
+  State<BarqApp> createState() => _BarqAppState();
 }
 
-class _SahmAppState extends State<SahmApp> {
+class _BarqAppState extends State<BarqApp> {
   late final AuthBloc _authBloc;
   late final AppRouter _appRouter;
 
@@ -62,7 +62,7 @@ class _SahmAppState extends State<SahmApp> {
         valueListenable: widget.localeNotifier,
         builder: (context, locale, _) {
           return MaterialApp.router(
-            title: 'Sahm',
+            title: 'Barq',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             locale: locale,

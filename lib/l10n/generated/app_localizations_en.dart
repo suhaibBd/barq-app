@@ -9,7 +9,7 @@ class SEn extends S {
   SEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Sahm';
+  String get appName => 'Barq';
 
   @override
   String get navHome => 'Home';
@@ -27,7 +27,7 @@ class SEn extends S {
   String get orders => 'Orders';
 
   @override
-  String get welcomeTitle => 'Welcome to Sahm';
+  String get welcomeTitle => 'Welcome to Barq';
 
   @override
   String get enterPhoneSubtitle => 'Enter your phone number to get started';
@@ -55,7 +55,7 @@ class SEn extends S {
   String get devLoginDriver => 'Login as Driver';
 
   @override
-  String get devLoginRestaurant => 'Login as Restaurant';
+  String get devLoginStore => 'Login as Store';
 
   @override
   String get enterOtp => 'Enter Verification Code';
@@ -77,7 +77,7 @@ class SEn extends S {
   String get verify => 'Verify';
 
   @override
-  String get howToUseAutostrad => 'How would you like to use Sahm?';
+  String get howToUseApp => 'How would you like to use Barq?';
 
   @override
   String get chooseRegistration =>
@@ -88,7 +88,7 @@ class SEn extends S {
 
   @override
   @override
-  String get restaurant => 'Restaurant';
+  String get store => 'Store';
 
   @override
   String get driver => 'Driver';
@@ -97,7 +97,7 @@ class SEn extends S {
   String get passengerSubtitle => 'Search for trips and book your seat';
 
   @override
-  String get restaurantSubtitle => 'Create delivery orders for your restaurant';
+  String get storeSubtitle => 'Create delivery orders for your business';
 
   @override
   String get driverSubtitle => 'Deliver orders and earn extra income';
@@ -110,7 +110,7 @@ class SEn extends S {
   String get registerAsPassenger => 'Register as Passenger';
 
   @override
-  String get registerAsRestaurant => 'Register as Restaurant';
+  String get registerAsStore => 'Register as Store';
 
   @override
   String get enterNameToStart => 'Enter your name to get started';
@@ -598,7 +598,7 @@ class SEn extends S {
 
   @override
   String appVersion(String version) {
-    return 'Sahm v$version';
+    return 'Barq v$version';
   }
 
   @override
@@ -621,7 +621,7 @@ class SEn extends S {
   String get paymentMethod => 'Payment Method';
 
   @override
-  String get paymentStep1 => 'Transfer via CliQ to: sahm@cliq';
+  String get paymentStep1 => 'Transfer via CliQ to: barq@cliq';
 
   @override
   String get paymentStep2 => 'Send us the receipt photo';
@@ -1136,7 +1136,7 @@ class SEn extends S {
   String get createNewOrder => 'Create New Order';
 
   @override
-  String get createOrderDesc => 'Create a delivery order for your restaurant';
+  String get createOrderDesc => 'Create a new delivery order';
 
   @override
   String get myRecentOrders => 'My Recent Orders';

@@ -24,8 +24,8 @@ class RoleToggleWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _buildTab(UserRole.restaurant, S.of(context).restaurant,
-              Icons.restaurant_rounded),
+          _buildTab(UserRole.store, S.of(context).store,
+              Icons.storefront_rounded),
           _buildTab(UserRole.driver, S.of(context).driver,
               Icons.directions_car_rounded),
         ],

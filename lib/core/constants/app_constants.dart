@@ -1,6 +1,6 @@
 class AppConstants {
-  static const String appName = 'سهم';
-  static const String appNameEn = 'Sahm';
+  static const String appName = 'برق';
+  static const String appNameEn = 'Barq';
   static const double listingFee = 0.25;
   static const String currency = 'JOD';
   static const int maxSeatsPerBooking = 4;
