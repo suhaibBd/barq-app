@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDqtM8IjHY51ytZZkbOJ6v1ixhuhxtjc8s',
-    appId: '1:1078630148752:android:29327e1a96fa5f794f0615',
+    appId: '1:1078630148752:android:c7f49df7713441904f0615',
     messagingSenderId: '1078630148752',
     projectId: 'autostrade-app',
     storageBucket: 'autostrade-app.firebasestorage.app',
@@ -65,10 +65,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDhROT2huikRgO31cdC6QZ7lKS0kgeQzrE',
-    appId: '1:1078630148752:ios:8e5316eb2783f9874f0615',
+    appId: '1:1078630148752:ios:3da2d7134d0a45a44f0615',
     messagingSenderId: '1078630148752',
     projectId: 'autostrade-app',
     storageBucket: 'autostrade-app.firebasestorage.app',
     iosBundleId: 'com.barq.app',
   );
+
 }
